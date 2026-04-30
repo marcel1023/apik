@@ -1,15 +1,16 @@
 /* JavaScript Document
 
 TemplateMo 601 Chain Summit
-
 https://templatemo.com/tm-601-chain-summit
 
 */
 
-
+// =========================
 // Animate counter numbers
+// =========================
 function animateCounters() {
    const counters = document.querySelectorAll('.stat-number');
+
    counters.forEach(counter => {
       const target = parseInt(counter.getAttribute('data-target'));
       const increment = target / 200;
@@ -27,7 +28,9 @@ function animateCounters() {
    });
 }
 
+// =========================
 // Countdown timer
+// =========================
 function updateCountdown() {
    const eventDate = new Date('2026-11-14T09:00:00');
    const now = new Date();
@@ -46,7 +49,9 @@ function updateCountdown() {
    }
 }
 
-// Create neural network animation
+// =========================
+// Neural Network Animation
+// =========================
 function createNeuralNetwork() {
    const container = document.getElementById('neuralNetwork');
    const nodes = 20;
@@ -59,7 +64,6 @@ function createNeuralNetwork() {
       node.style.animationDelay = Math.random() * 2 + 's';
       container.appendChild(node);
 
-      // Create connections
       if (i > 0 && Math.random() > 0.5) {
          const connection = document.createElement('div');
          connection.className = 'connection';
@@ -72,7 +76,9 @@ function createNeuralNetwork() {
    }
 }
 
-// Create floating particles
+// =========================
+// Floating Particles
+// =========================
 function createParticles() {
    const container = document.getElementById('particles');
    const particleCount = 50;
@@ -87,24 +93,25 @@ function createParticles() {
    }
 }
 
-// Schedule tab functionality
+// =========================
+// Schedule Tabs
+// =========================
 function showSchedule(day, event) {
-   // Hide all schedule content
    document.querySelectorAll('.schedule-content').forEach(content => {
       content.classList.remove('active');
    });
 
-   // Remove active class from all tabs
    document.querySelectorAll('.tab-btn').forEach(tab => {
       tab.classList.remove('active');
    });
 
-   // Show selected day and activate tab
    document.getElementById(day).classList.add('active');
    event.target.classList.add('active');
 }
 
-// Mobile menu toggle
+// =========================
+// Mobile Menu
+// =========================
 function toggleMenu() {
    const mobileMenu = document.querySelector('.mobile-menu');
    const mobileNav = document.getElementById('mobileNav');
@@ -112,29 +119,32 @@ function toggleMenu() {
    mobileMenu.classList.toggle('active');
    mobileNav.classList.toggle('active');
 
-   // Prevent body scroll when menu is open
-   document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+   document.body.style.overflow =
+      mobileNav.classList.contains('active') ? 'hidden' : 'auto';
 }
 
 function closeMenu() {
-   const mobileMenu = document.querySelector('.mobile-menu');
-   const mobileNav = document.getElementById('mobileNav');
-
-   mobileMenu.classList.remove('active');
-   mobileNav.classList.remove('active');
+   document.querySelector('.mobile-menu').classList.remove('active');
+   document.getElementById('mobileNav').classList.remove('active');
    document.body.style.overflow = 'auto';
 }
 
-// Timeline item toggle
+// =========================
+// Timeline Toggle
+// =========================
 function toggleTimelineItem(item) {
    item.classList.toggle('expanded');
 }
 
-// Smooth scrolling for navigation links
+// =========================
+// Smooth Scroll
+// =========================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
    anchor.addEventListener('click', function (e) {
       e.preventDefault();
+
       const target = document.querySelector(this.getAttribute('href'));
+
       if (target) {
          target.scrollIntoView({
             behavior: 'smooth',
@@ -144,7 +154,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
    });
 });
 
-// Update active menu items on scroll
+// =========================
+// Active Menu on Scroll
+// =========================
 function updateActiveMenuItem() {
    const sections = document.querySelectorAll('section[id]');
    const scrollPosition = window.scrollY + 100;
@@ -154,18 +166,21 @@ function updateActiveMenuItem() {
       const sectionHeight = section.offsetHeight;
       const sectionId = section.getAttribute('id');
 
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-         // Update desktop menu
+      if (
+         scrollPosition >= sectionTop &&
+         scrollPosition < sectionTop + sectionHeight
+      ) {
          document.querySelectorAll('.nav-links a').forEach(link => {
             link.classList.remove('active');
+
             if (link.getAttribute('href') === `#${sectionId}`) {
                link.classList.add('active');
             }
          });
 
-         // Update mobile menu
          document.querySelectorAll('.mobile-nav a').forEach(link => {
             link.classList.remove('active');
+
             if (link.getAttribute('href') === `#${sectionId}`) {
                link.classList.add('active');
             }
@@ -174,38 +189,38 @@ function updateActiveMenuItem() {
    });
 }
 
-// Header scroll effect
+// =========================
+// Header Scroll Effect
+// =========================
 window.addEventListener('scroll', () => {
    const header = document.querySelector('header');
+
    if (window.scrollY > 100) {
-      header.style.background = 'rgba(10, 10, 15, 0.95)';
-      header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+      header.style.background = 'rgba(10,10,15,0.95)';
+      header.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
    } else {
-      header.style.background = 'rgba(10, 10, 15, 0.9)';
-      header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.05)';
+      header.style.background = 'rgba(10,10,15,0.9)';
+      header.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
    }
 
-   // Update active menu item
    updateActiveMenuItem();
 });
 
-// Intersection Observer for scroll animations
-const observerOptions = {
-   threshold: 0.1,
-   rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
+// =========================
+// Scroll Animation Observer
+// =========================
+const observer = new IntersectionObserver(entries => {
    entries.forEach(entry => {
       if (entry.isIntersecting) {
          entry.target.classList.add('animated');
       }
    });
-}, observerOptions);
+}, {
+   threshold: 0.1,
+   rootMargin: '0px 0px -100px 0px'
+});
 
-// Initialize scroll animations
 function initScrollAnimations() {
-   // Add animation classes to elements
    document.querySelectorAll('.section h2').forEach(heading => {
       heading.classList.add('animate-on-scroll');
    });
@@ -215,24 +230,28 @@ function initScrollAnimations() {
       item.classList.add('stagger-animation');
    });
 
-   // Observe all animation elements
    document.querySelectorAll('.animate-on-scroll').forEach(el => {
       observer.observe(el);
    });
 }
 
-// Add hexagonal decorations dynamically
+// =========================
+// Hex Decorations
+// =========================
 function addHexDecorations() {
    const sections = document.querySelectorAll('.section');
+
    sections.forEach((section, index) => {
-      if (index > 0) { // Skip hero section
+      if (index > 0) {
          const hexCount = 2 + Math.floor(Math.random() * 3);
+
          for (let i = 0; i < hexCount; i++) {
             const hex = document.createElement('div');
             hex.className = 'hex-decoration';
             hex.style.top = Math.random() * 80 + 10 + '%';
             hex.style.left = Math.random() * 80 + 10 + '%';
             hex.style.animationDelay = Math.random() * 6 + 's';
+
             section.style.position = 'relative';
             section.appendChild(hex);
          }
@@ -240,64 +259,56 @@ function addHexDecorations() {
    });
 }
 
-// Handle contact form submission
-function handleContactSubmit(event) {
-   event.preventDefault();
+// =========================
+// Slider XE8
+// =========================
+let currentSlide = 0;
 
-   const name = document.getElementById('contactName').value;
-   const email = document.getElementById('contactEmail').value;
-   const subject = document.getElementById('contactSubject').value;
-   const message = document.getElementById('contactMessage').value;
+function showSlide(index) {
+   const slides = document.querySelectorAll('.slide');
+   const dots = document.querySelectorAll('.slide-dots span');
 
-   // Simulate form submission (in a real scenario, this would send to a server)
-   if (name && email && subject && message) {
-      // Show success message
-      alert('Thank you for your message! We\'ll get back to you soon.');
+   if (slides.length === 0) return;
 
-      // Clear the form
-      document.getElementById('contactName').value = '';
-      document.getElementById('contactEmail').value = '';
-      document.getElementById('contactSubject').value = '';
-      document.getElementById('contactMessage').value = '';
+   slides.forEach(slide => slide.classList.remove('active'));
+   dots.forEach(dot => dot.classList.remove('active'));
+
+   slides[index].classList.add('active');
+
+   if (dots[index]) {
+      dots[index].classList.add('active');
    }
+
+   currentSlide = index;
 }
 
-// Handle email submission
-function handleEmailSubmit(event) {
-   event.preventDefault();
+function changeSlide(step) {
+   const slides = document.querySelectorAll('.slide');
+   let newIndex = currentSlide + step;
 
-   const emailInput = document.getElementById('emailInput');
-   const formMessage = document.getElementById('formMessage');
-   const email = emailInput.value;
+   if (newIndex >= slides.length) newIndex = 0;
+   if (newIndex < 0) newIndex = slides.length - 1;
 
-   // Simulate form submission (in a real scenario, this would send to a server)
-   if (email) {
-      // Show success message
-      formMessage.textContent = 'Thank you for signing up! We\'ll keep you updated on Chain Summit.';
-      formMessage.className = 'form-message success';
-      formMessage.style.display = 'block';
-
-      // Clear the input
-      emailInput.value = '';
-
-      // Hide message after 5 seconds
-      setTimeout(() => {
-         formMessage.style.display = 'none';
-      }, 5000);
-   } else {
-      // Show error message
-      formMessage.textContent = 'Please enter a valid email address.';
-      formMessage.className = 'form-message error';
-      formMessage.style.display = 'block';
-
-      // Hide message after 3 seconds
-      setTimeout(() => {
-         formMessage.style.display = 'none';
-      }, 3000);
-   }
+   showSlide(newIndex);
 }
 
-// Initialize everything when page loads
+function goToSlide(index) {
+   showSlide(index);
+}
+
+function autoSlide() {
+   setInterval(() => {
+      const slides = document.querySelectorAll('.slide');
+
+      if (slides.length > 0) {
+         changeSlide(1);
+      }
+   }, 4000);
+}
+
+// =========================
+// Page Load
+// =========================
 window.addEventListener('load', () => {
    animateCounters();
    createNeuralNetwork();
@@ -305,59 +316,8 @@ window.addEventListener('load', () => {
    updateCountdown();
    initScrollAnimations();
    addHexDecorations();
-
-   // Update countdown every second
-   setInterval(updateCountdown, 1000);
-   // TAMBAHKAN PALING BAWAH FILE JAVASCRIPT
-
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.slide-dots span');
-
-function showSlide(index){
-   if(slides.length === 0) return;
-
-   slides.forEach(slide => slide.classList.remove('active'));
-
-   if(dots.length > 0){
-      dots.forEach(dot => dot.classList.remove('active'));
-   }
-
-   slides[index].classList.add('active');
-
-   if(dots.length > 0){
-      dots[index].classList.add('active');
-   }
-
-   currentSlide = index;
-}
-
-function changeSlide(step){
-   let newIndex = currentSlide + step;
-
-   if(newIndex >= slides.length){
-      newIndex = 0;
-   }
-
-   if(newIndex < 0){
-      newIndex = slides.length - 1;
-   }
-
-   showSlide(newIndex);
-}
-
-function goToSlide(index){
-   showSlide(index);
-}
-
-// auto slide
-setInterval(() => {
-   if(slides.length > 0){
-      changeSlide(1);
-   }
-}, 4000);
-
-// saat halaman selesai load
-window.addEventListener('load', () => {
    showSlide(0);
+   autoSlide();
+
+   setInterval(updateCountdown, 1000);
 });
