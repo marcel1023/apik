@@ -259,65 +259,39 @@ function addHexDecorations() {
    });
 }
 
-// =========================
-// Slider XE8
-// =========================
+/* ===============================
+   SLIDER SISWA X-E8
+================================= */
+document.addEventListener("DOMContentLoaded", function () {
+
 let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
 
-function showSlide(index) {
-   const slides = document.querySelectorAll('.slide');
-   const dots = document.querySelectorAll('.slide-dots span');
-
-   if (slides.length === 0) return;
-
-   slides.forEach(slide => slide.classList.remove('active'));
-   dots.forEach(dot => dot.classList.remove('active'));
-
-   slides[index].classList.add('active');
-
-   if (dots[index]) {
-      dots[index].classList.add('active');
-   }
-
-   currentSlide = index;
+function showSlide(index){
+    slides.forEach(slide => slide.classList.remove("active"));
+    slides[index].classList.add("active");
 }
 
-function changeSlide(step) {
-   const slides = document.querySelectorAll('.slide');
-   let newIndex = currentSlide + step;
+function changeSlide(direction){
+    currentSlide += direction;
 
-   if (newIndex >= slides.length) newIndex = 0;
-   if (newIndex < 0) newIndex = slides.length - 1;
+    if(currentSlide >= slides.length){
+        currentSlide = 0;
+    }
 
-   showSlide(newIndex);
+    if(currentSlide < 0){
+        currentSlide = slides.length - 1;
+    }
+
+    showSlide(currentSlide);
 }
 
-function goToSlide(index) {
-   showSlide(index);
-}
+window.changeSlide = changeSlide;
 
-function autoSlide() {
-   setInterval(() => {
-      const slides = document.querySelectorAll('.slide');
+setInterval(() => {
+    changeSlide(1);
+}, 4000);
 
-      if (slides.length > 0) {
-         changeSlide(1);
-      }
-   }, 4000);
-}
+showSlide(currentSlide);
 
-// =========================
-// Page Load
-// =========================
-window.addEventListener('load', () => {
-   animateCounters();
-   createNeuralNetwork();
-   createParticles();
-   updateCountdown();
-   initScrollAnimations();
-   addHexDecorations();
-   showSlide(0);
-   autoSlide();
-
-   setInterval(updateCountdown, 1000);
 });
