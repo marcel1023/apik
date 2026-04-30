@@ -308,4 +308,56 @@ window.addEventListener('load', () => {
 
    // Update countdown every second
    setInterval(updateCountdown, 1000);
+   // TAMBAHKAN PALING BAWAH FILE JAVASCRIPT
+
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.slide-dots span');
+
+function showSlide(index){
+   if(slides.length === 0) return;
+
+   slides.forEach(slide => slide.classList.remove('active'));
+
+   if(dots.length > 0){
+      dots.forEach(dot => dot.classList.remove('active'));
+   }
+
+   slides[index].classList.add('active');
+
+   if(dots.length > 0){
+      dots[index].classList.add('active');
+   }
+
+   currentSlide = index;
+}
+
+function changeSlide(step){
+   let newIndex = currentSlide + step;
+
+   if(newIndex >= slides.length){
+      newIndex = 0;
+   }
+
+   if(newIndex < 0){
+      newIndex = slides.length - 1;
+   }
+
+   showSlide(newIndex);
+}
+
+function goToSlide(index){
+   showSlide(index);
+}
+
+// auto slide
+setInterval(() => {
+   if(slides.length > 0){
+      changeSlide(1);
+   }
+}, 4000);
+
+// saat halaman selesai load
+window.addEventListener('load', () => {
+   showSlide(0);
 });
